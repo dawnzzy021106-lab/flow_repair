@@ -17,6 +17,9 @@ namespace ECProject
     rpc_server_->register_handler<&Coordinator::request_flow_repair>(this);
     rpc_server_->register_handler<&Coordinator::request_merge>(this);
     rpc_server_->register_handler<&Coordinator::list_stripes>(this);
+    // 在已有的 register_handler 列表后加上：
+    rpc_server_->register_handler<&Coordinator::request_snapshot_metadata>(this);
+    rpc_server_->register_handler<&Coordinator::request_revert_metadata>(this);
 
     cur_stripe_id_ = 0;
     cur_block_id_ = 0;
@@ -391,5 +394,26 @@ namespace ECProject
     MergeResp response;
     do_stripe_merge(response, step_size);
     return response;
+  }
+
+  // 新增：元数据快照与回滚 RPC 接口
+  void Coordinator::request_snapshot_metadata()
+  {
+    mutex_.lock();
+    stripe_table_snapshot_ = stripe_table_;
+    mutex_.unlock();
+    if (IF_DEBUG) {
+      std::cout << "[TEST] Metadata snapshot taken. Stripe count: " << stripe_table_snapshot_.size() << std::endl;
+    }
+  }
+
+  void Coordinator::request_revert_metadata()
+  {
+    mutex_.lock();
+    stripe_table_ = stripe_table_snapshot_;
+    mutex_.unlock();
+    if (IF_DEBUG) {
+      std::cout << "[TEST] Metadata reverted to snapshot." << std::endl;
+    }
   }
 }

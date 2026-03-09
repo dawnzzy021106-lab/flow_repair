@@ -27,6 +27,10 @@ namespace ECProject {
     // others
     std::vector<unsigned int> list_stripes();
 
+    // 新增：让客户端可以向 Coordinator 发起快照和回滚的请求
+    void snapshot_metadata();
+    void revert_metadata();
+
   private:
     std::unique_ptr<coro_rpc::coro_rpc_client> rpc_coordinator_{nullptr};
     int port_;

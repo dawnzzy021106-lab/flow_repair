@@ -80,26 +80,36 @@ void test_node_repair(Client &client, int failed_node_id)
   std::cout << "Failed Node IDs: ";
   for (auto id : failed_node_ids) std::cout << id << " ";
   std::cout << std::endl;
-  // std::cout << "================== ec_prototype =====================";
 
-  // // Trigger the system-wide node repair
-  // auto resp = client.nodes_repair(failed_node_ids);
+  // 1. 在修复发生前，拍下当前集群布局的元数据快照
+  client.snapshot_metadata();
 
-  // if (resp.repair_time > 0) {
-  //   std::cout << "Repair Result:        " << std::endl;
-  //   std::cout << "  Total Time:         " << resp.repair_time << "s" << std::endl;
-  //   std::cout << "  Decoding:           " << resp.decoding_time << "s" << std::endl;
-  //   std::cout << "  Network:            " << resp.cross_cluster_time << "s" << std::endl;
-  //   std::cout << "  Meta (Coord):       " << resp.meta_time << "s" << std::endl;
-  //   std::cout << "  Cross-Cluster-Count:" << resp.cross_cluster_transfers << std::endl;
-  //   std::cout << "  I/Os:               " << resp.io_cnt << std::endl;
-  // } else {
-  //   std::cout << "No blocks were found on the failed nodes to repair." << std::endl;
-  // }
+  // ========================================================
+  // 测试算法 1：基线修复 (ec_prototype)
+  // ========================================================
+  std::cout << "\n================== ec_prototype =====================" << std::endl;
+  auto resp = client.nodes_repair(failed_node_ids);
 
-  std::cout << "================= min cost max flow =================";
+  if (resp.repair_time > 0) {
+    std::cout << "Repair Result:        " << std::endl;
+    std::cout << "  Total Time:         " << resp.repair_time << "s" << std::endl;
+    std::cout << "  Decoding:           " << resp.decoding_time << "s" << std::endl;
+    std::cout << "  Network:            " << resp.cross_cluster_time << "s" << std::endl;
+    std::cout << "  Meta (Coord):       " << resp.meta_time << "s" << std::endl;
+    std::cout << "  Cross-Cluster-Count:" << resp.cross_cluster_transfers << std::endl;
+    std::cout << "  I/Os:               " << resp.io_cnt << std::endl;
+  } else {
+    std::cout << "No blocks were found on the failed nodes to repair." << std::endl;
+  }
 
-  // Trigger the system-wide node repair
+
+  // 2. 将元数据回滚，假装上一步的修复从未发生过
+  client.revert_metadata();
+
+  // ========================================================
+  // 测试算法 2：最大流修复 (min cost max flow)
+  // ========================================================
+  std::cout << "\n================= min cost max flow =================" << std::endl;
   auto resp2 = client.nodes_flow_repair(failed_node_ids);
 
   if (resp2.repair_time > 0) {

@@ -192,4 +192,17 @@ namespace ECProject
             rpc_coordinator_->call<&Coordinator::list_stripes>()).value();
     return response;
   }
+
+  // 新增：让客户端可以向 Coordinator 发起快照和回滚的请求
+  void Client::snapshot_metadata()
+  {
+    async_simple::coro::syncAwait(
+        rpc_coordinator_->call<&Coordinator::request_snapshot_metadata>());
+  }
+
+  void Client::revert_metadata()
+  {
+    async_simple::coro::syncAwait(
+        rpc_coordinator_->call<&Coordinator::request_revert_metadata>());
+  }
 }

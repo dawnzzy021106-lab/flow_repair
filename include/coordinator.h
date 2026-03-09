@@ -39,6 +39,10 @@ namespace ECProject
     // aux.cpp
     void init_ec_schema(std::string config_file);
 
+    // 新增：元数据快照与回滚 RPC 接口
+    void request_snapshot_metadata();
+    void request_revert_metadata();
+
     private:
     // aux.cpp
     void init_cluster_info();
@@ -124,5 +128,8 @@ namespace ECProject
     std::vector<std::vector<unsigned int>> merge_groups_;
     std::vector<unsigned int> free_clusters_;
     bool merged_flag_ = false;
+
+    // 新增：保存 stripe_table_ 的快照
+    std::unordered_map<unsigned int, Stripe> stripe_table_snapshot_;
   };
 }
