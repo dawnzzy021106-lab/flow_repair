@@ -87,28 +87,6 @@ void test_node_repair(Client &client, int failed_node_id)
   // ========================================================
   // 测试算法 1：基线修复 (ec_prototype)
   // ========================================================
-  std::cout << "\n================== ec_prototype =====================" << std::endl;
-  auto resp = client.nodes_repair(failed_node_ids);
-
-  if (resp.repair_time > 0) {
-    std::cout << "Repair Result:        " << std::endl;
-    std::cout << "  Total Time:         " << resp.repair_time << "s" << std::endl;
-    std::cout << "  Decoding:           " << resp.decoding_time << "s" << std::endl;
-    std::cout << "  Network:            " << resp.cross_cluster_time << "s" << std::endl;
-    std::cout << "  Meta (Coord):       " << resp.meta_time << "s" << std::endl;
-    std::cout << "  Cross-Cluster-Count:" << resp.cross_cluster_transfers << std::endl;
-    std::cout << "  I/Os:               " << resp.io_cnt << std::endl;
-  } else {
-    std::cout << "No blocks were found on the failed nodes to repair." << std::endl;
-  }
-
-
-  // 2. 将元数据回滚，假装上一步的修复从未发生过
-  client.revert_metadata();
-
-  // ========================================================
-  // 测试算法 2：最大流修复 (min cost max flow)
-  // ========================================================
   std::cout << "\n================= min cost max flow =================" << std::endl;
   auto resp2 = client.nodes_flow_repair(failed_node_ids);
 
@@ -120,6 +98,56 @@ void test_node_repair(Client &client, int failed_node_id)
     std::cout << "  Meta (Coord):       " << resp2.meta_time << "s" << std::endl;
     std::cout << "  Cross-Cluster-Count:" << resp2.cross_cluster_transfers << std::endl;
     std::cout << "  I/Os:               " << resp2.io_cnt << std::endl;
+  } else {
+    std::cout << "No blocks were found on the failed nodes to repair." << std::endl;
+  }
+  // std::cout << "\n================== ec_prototype =====================" << std::endl;
+  // auto resp = client.nodes_repair(failed_node_ids);
+
+  // if (resp.repair_time > 0) {
+  //   std::cout << "Repair Result:        " << std::endl;
+  //   std::cout << "  Total Time:         " << resp.repair_time << "s" << std::endl;
+  //   std::cout << "  Decoding:           " << resp.decoding_time << "s" << std::endl;
+  //   std::cout << "  Network:            " << resp.cross_cluster_time << "s" << std::endl;
+  //   std::cout << "  Meta (Coord):       " << resp.meta_time << "s" << std::endl;
+  //   std::cout << "  Cross-Cluster-Count:" << resp.cross_cluster_transfers << std::endl;
+  //   std::cout << "  I/Os:               " << resp.io_cnt << std::endl;
+  // } else {
+  //   std::cout << "No blocks were found on the failed nodes to repair." << std::endl;
+  // }
+
+
+  // 2. 将元数据回滚，假装上一步的修复从未发生过
+  client.revert_metadata();
+
+  // ========================================================
+  // 测试算法 2：最大流修复 (min cost max flow)
+  // ========================================================
+  // std::cout << "\n================= min cost max flow =================" << std::endl;
+  // auto resp2 = client.nodes_flow_repair(failed_node_ids);
+
+  // if (resp2.repair_time > 0) {
+  //   std::cout << "Repair Result:        " << std::endl;
+  //   std::cout << "  Total Time:         " << resp2.repair_time << "s" << std::endl;
+  //   std::cout << "  Decoding:           " << resp2.decoding_time << "s" << std::endl;
+  //   std::cout << "  Network:            " << resp2.cross_cluster_time << "s" << std::endl;
+  //   std::cout << "  Meta (Coord):       " << resp2.meta_time << "s" << std::endl;
+  //   std::cout << "  Cross-Cluster-Count:" << resp2.cross_cluster_transfers << std::endl;
+  //   std::cout << "  I/Os:               " << resp2.io_cnt << std::endl;
+  // } else {
+  //   std::cout << "No blocks were found on the failed nodes to repair." << std::endl;
+  // }
+  std::cout << "\n================== ec_prototype =====================" << std::endl;
+  auto resp = client.nodes_repair(failed_node_ids);
+
+  if (resp.repair_time > 0) {
+    std::cout << "Repair Result:        " << std::endl;
+    std::cout << "  Total Time:         " << resp.repair_time << "s" << std::endl;
+    std::cout << "  Decoding:           " << resp.decoding_time << "s" << std::endl;
+    std::cout << "  Network:            " << resp.cross_cluster_time << "s" << std::endl;
+    std::cout << "  Meta (Coord):       " << resp.meta_time << "s" << std::endl;
+    std::cout << "  Cross-Cluster-Count:" << resp.cross_cluster_transfers << std::endl;
+    std::cout << "  I/Os:               " << resp.io_cnt << std::endl;
   } else {
     std::cout << "No blocks were found on the failed nodes to repair." << std::endl;
   }

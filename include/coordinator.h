@@ -129,7 +129,7 @@ namespace ECProject
     std::vector<unsigned int> free_clusters_;
     bool merged_flag_ = false;
 
-    // 新增：保存 stripe_table_ 的快照
-    std::unordered_map<unsigned int, Stripe> stripe_table_snapshot_;
+    // 新增：专门用于对比测试的初始块放置备份
+    std::unordered_map<unsigned int, std::vector<unsigned int>> initial_placement_;
   };
 }

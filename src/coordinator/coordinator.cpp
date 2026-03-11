@@ -396,24 +396,26 @@ namespace ECProject
     return response;
   }
 
-  // 新增：元数据快照与回滚 RPC 接口
+  // 备份初始块放置 (Placement)
   void Coordinator::request_snapshot_metadata()
   {
-    mutex_.lock();
-    stripe_table_snapshot_ = stripe_table_;
-    mutex_.unlock();
-    if (IF_DEBUG) {
-      std::cout << "[TEST] Metadata snapshot taken. Stripe count: " << stripe_table_snapshot_.size() << std::endl;
+    initial_placement_.clear();
+    for (auto& pair : stripe_table_) {
+      // 仅拷贝每个条带的 blocks2nodes 数组，完全避开复杂对象和指针的拷贝
+      initial_placement_[pair.first] = pair.second.blocks2nodes;
     }
+    std::cout << "[TEST] Initial placement saved. Stripe count: " << initial_placement_.size() << std::endl;
   }
 
+  // 还原初始块放置 (Placement)
   void Coordinator::request_revert_metadata()
   {
-    mutex_.lock();
-    stripe_table_ = stripe_table_snapshot_;
-    mutex_.unlock();
-    if (IF_DEBUG) {
-      std::cout << "[TEST] Metadata reverted to snapshot." << std::endl;
+    for (auto& pair : initial_placement_) {
+      if (stripe_table_.find(pair.first) != stripe_table_.end()) {
+        // 将 blocks2nodes 数组覆盖回去，恢复到故障发生前的完美状态
+        stripe_table_[pair.first].blocks2nodes = pair.second;
+      }
     }
+    std::cout << "[TEST] Placement reverted to initial state." << std::endl;
   }
 }

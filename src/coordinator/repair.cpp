@@ -241,29 +241,54 @@ namespace ECProject
         for (auto it = stripe_table_.begin(); it != stripe_table_.end(); it++) {
           int t_stripe_id = it->first;
           auto& stripe = it->second;
-          int n = stripe.ec->k + stripe.ec->m;
-          int failed_block_idx = -1;
-          // 查找该条带中的块是否有在故障节点node_id中的
+          // [修改1] 使用 blocks2nodes 的实际大小作为边界，避免越界访问产生未定义行为
+          int n = stripe.blocks2nodes.size();
+          // int n = stripe.ec->k + stripe.ec->m;
+          // [修改2] 使用 vector 收集所有匹配的块，替代原先只找第一个就 break 的逻辑
+          std::vector<int> current_failed_blocks;
           for (int j = 0; j < n; j++) {
             if (stripe.blocks2nodes[j] == node_id) {
-              failed_block_idx = j;
-              break;
+              current_failed_blocks.push_back(j);
             }
           }
-          if (failed_block_idx != -1) {
+          if (!current_failed_blocks.empty()) {
             auto map_it = failures_map.find(t_stripe_id);
             if (map_it != failures_map.end()) {
-              map_it->second.push_back(failed_block_idx); // 记录故障块索引
+              // 如果已存在该条带，直接追加新的故障块索引
+              for (int idx : current_failed_blocks) {
+                map_it->second.push_back(idx);
+              }
             } else {
               if (failures_map.size() < (int)repair_stripe_num) {
-                std::vector<int> failed_blocks;
-                failed_blocks.push_back(failed_block_idx);
-                failures_map[t_stripe_id] = failed_blocks;
+                failures_map[t_stripe_id] = current_failed_blocks;
               } else {
                 continue;
               }
             }
           }
+
+          // int failed_block_idx = -1;
+          // // 查找该条带中的块是否有在故障节点node_id中的
+          // for (int j = 0; j < n; j++) {
+          //   if (stripe.blocks2nodes[j] == node_id) {
+          //     failed_block_idx = j;
+          //     break;
+          //   }
+          // }
+          // if (failed_block_idx != -1) {
+          //   auto map_it = failures_map.find(t_stripe_id);
+          //   if (map_it != failures_map.end()) {
+          //     map_it->second.push_back(failed_block_idx); // 记录故障块索引
+          //   } else {
+          //     if (failures_map.size() < (int)repair_stripe_num) {
+          //       std::vector<int> failed_blocks;
+          //       failed_blocks.push_back(failed_block_idx);
+          //       failures_map[t_stripe_id] = failed_blocks;
+          //     } else {
+          //       continue;
+          //     }
+          //   }
+          // }
           // BUG: 少了判断
           // if (failures_map.find(t_stripe_id) != failures_map.end()) {
           //   failures_map[t_stripe_id].push_back(failed_block_idx); // 记录故障块索引
@@ -307,6 +332,11 @@ namespace ECProject
       int cnt = 0;
       // 对修复方案中的可用块，统计每个集群中的可用块数量
       for (auto& help_block : repair_plan.help_blocks) {
+        // 【新增检查】：防止 help_block[0] 越界崩溃
+        if (help_block.empty()) {
+            map2clusters[cnt++] = -1; 
+            continue;
+        }
         unsigned int nid = t_blocks2nodes[help_block[0]];
         unsigned int cid = node_table_[nid].map2cluster;
         map2clusters[cnt++] = cid;
@@ -400,6 +430,8 @@ namespace ECProject
       std::vector<HelpRepairPlan> help_plans;
       // 添加helper块信息
       for (int i = 0; i < clusters_num; i++) {
+        // 【新增检查】
+        if (repair_plan.help_blocks[i].empty()) continue;
         if (map2clusters[i] != main_cid) {
           HelpRepairPlan help_plan;
           help_plan.ec_type = main_plan.ec_type;
@@ -884,7 +916,9 @@ namespace ECProject
         std::vector<int> cluster_counts(num_clusters, 0);
 
         // 遍历该条带的所有块（假设总块数为 k+m，可以从 stripe 中获取，例如 stripe.ec->k + stripe.ec->m）
-        int total_blocks = stripe.ec->k + stripe.ec->m;
+        // int total_blocks = stripe.ec->k + stripe.ec->m;
+        // 【修改后】使用真实的 blocks2nodes 大小防止越界读取垃圾数据
+        int total_blocks = stripe.blocks2nodes.size();
         for (int block_idx = 0; block_idx < total_blocks; ++block_idx) {
             if (failed_set.find(block_idx) != failed_set.end()) {
                 continue;  // 故障块不计入可用
@@ -1241,6 +1275,11 @@ namespace ECProject
       int cnt = 0;
       // 对修复方案中的可用块，统计每个集群中的可用块数量
       for (auto& help_block : repair_plan.help_blocks) {
+        // 【新增检查】：如果 EC 算法返回了空的帮手块分组，直接用 -1 占位并跳过，防止 help_block[0] 越界崩溃！
+        if (help_block.empty()) {
+            map2clusters[cnt++] = -1; 
+            continue;
+        }
         unsigned int nid = t_blocks2nodes[help_block[0]];
         unsigned int cid = node_table_[nid].map2cluster;
         map2clusters[cnt++] = cid;
@@ -1364,6 +1403,8 @@ namespace ECProject
       std::vector<HelpRepairPlan> help_plans;
       // 添加helper块信息
       for (int i = 0; i < clusters_num; i++) {
+        // 【新增检查】：遇到空分组直接跳过，防止发送无效 RPC
+        if (repair_plan.help_blocks[i].empty()) continue;
         if (map2clusters[i] != main_cid) {
           HelpRepairPlan help_plan;
           help_plan.ec_type = main_plan.ec_type;
