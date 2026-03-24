@@ -162,7 +162,7 @@
 - 李永坤 Li Yongkun（第 1 作者 / 1st author）
 - 吴嘉宇 Wu Jiayu（第 3 作者 / 3rd author）
 
-**全部作者 / All Authors:** Yongkun Li, Conghao Liu, Jiayu Wu, Helen H. W. Chan, Patrick P. C. Lee, Shuigeng Zhou, Yinlong Xu
+**全部作者 / All Authors:** Yongkun Li, Conghao Liu, Jiayu Wu, Helen H. W. Chan, Patrick P. C. Lee, Shuigeng Zhou, and Yinlong Xu
 
 **刊名 / Venue:** USENIX Annual Technical Conference (USENIX ATC '19)
 
@@ -177,7 +177,7 @@
 **研究生作者（排序）/ Graduate Student Author (Rank):**
 - 王睿 Wang Rui（第 1 作者 / 1st author）
 
-**全部作者 / All Authors:** Rui Wang, Yongkun Li, Hong Xie, Yinlong Xu, John C. S. Lui
+**全部作者 / All Authors:** Rui Wang, Yongkun Li, Hong Xie, Yinlong Xu, and John C. S. Lui
 
 **刊名 / Venue:** USENIX Annual Technical Conference (USENIX ATC '20)
 
@@ -192,7 +192,7 @@
 **研究生作者（排序）/ Graduate Student Author (Rank):**
 - 王文涛 Wang Wentao（第 1 作者 / 1st author）
 
-**全部作者 / All Authors:** Wentao Wang, Ge Li, Bo Ma, Xin Xia, Zhi Jin
+**全部作者 / All Authors:** Wentao Wang, Ge Li, Bo Ma, Xin Xia, and Zhi Jin
 
 **刊名 / Venue:** IEEE/ACM International Conference on Software Engineering (ICSE 2018)
 
@@ -207,7 +207,7 @@
 **研究生作者（排序）/ Graduate Student Author (Rank):**
 - 赵胜松 Zhao Shengsong（第 1 作者 / 1st author）
 
-**全部作者 / All Authors:** Shengsong Zhao, Fang Liu, Wei Hu, Tong Liu, Lin-Wang Wang, Wei Fang, Jinlong Yang
+**全部作者 / All Authors:** Shengsong Zhao, Fang Liu, Wei Hu, Tong Liu, Lin-Wang Wang, Wei Fang, and Jinlong Yang
 
 **刊名 / Venue:** International Conference for High Performance Computing, Networking, Storage, and Analysis (SC '19)
 
@@ -222,7 +222,7 @@
 **研究生作者（排序）/ Graduate Student Author (Rank):**
 - 熊焱 Xiong Yan（第 1 作者 / 1st author）
 
-**全部作者 / All Authors:** Yan Xiong, Cheng Su, Yue Liu, Tianyang Tu, Xueli Chen, Siwei Wang
+**全部作者 / All Authors:** Yan Xiong, Cheng Su, Yue Liu, Tianyang Tu, Xueli Chen, Siwei Wang, and Wenchao Huang
 
 **刊名 / Venue:** USENIX Security Symposium (USENIX Security '20)
 
@@ -237,7 +237,7 @@
 **研究生作者（排序）/ Graduate Student Author (Rank):**
 - 丁翊霖 Ding Yilin（第 1 作者 / 1st author）
 
-**全部作者 / All Authors:** Yilin Ding, Xin-Chuan Wu, Adam Holmes, Ash Wiseth, Diana Franklin, Margaret Martonosi, Frederic T. Chong
+**全部作者 / All Authors:** Yilin Ding, Xin-Chuan Wu, Adam Holmes, Ash Wiseth, Diana Franklin, Margaret Martonosi, and Frederic T. Chong
 
 **刊名 / Venue:** AAAI Conference on Artificial Intelligence (AAAI 2020)
 
