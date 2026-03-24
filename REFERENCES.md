@@ -149,3 +149,102 @@
 ---
 
 > **说明 / Note:** 上述信息以公开数据库及出版记录为准；如遇版次或页码差异，请以官方出版渠道查阅为最终依据。
+
+---
+
+# 补充参考文献（格式：研究生作者名称（排序）、论文题名、刊名、年,卷（期）、起止页码）
+
+---
+
+## 13. ElasticBF: Elastic Bloom Filter with Hotness Awareness for Boosting Read Performance in Large Key-Value Stores
+
+**研究生作者（排序）/ Graduate Student Author (Rank):**
+- 李永坤 Li Yongkun（第 1 作者 / 1st author）
+- 吴嘉宇 Wu Jiayu（第 3 作者 / 3rd author）
+
+**全部作者 / All Authors:** Yongkun Li, Conghao Liu, Jiayu Wu, Helen H. W. Chan, Patrick P. C. Lee, Shuigeng Zhou, Yinlong Xu
+
+**刊名 / Venue:** USENIX Annual Technical Conference (USENIX ATC '19)
+
+| 年份 Year | 卷（期）Volume(Issue) | 起止页码 Pages |
+|-----------|----------------------|--------------|
+| 2019 | — | 739–752 |
+
+---
+
+## 14. GraphWalker: An I/O-Efficient and Resource-Friendly Graph Analytic System for Fast and Scalable Random Walks
+
+**研究生作者（排序）/ Graduate Student Author (Rank):**
+- 王睿 Wang Rui（第 1 作者 / 1st author）
+
+**全部作者 / All Authors:** Rui Wang, Yongkun Li, Hong Xie, Yinlong Xu, John C. S. Lui
+
+**刊名 / Venue:** USENIX Annual Technical Conference (USENIX ATC '20)
+
+| 年份 Year | 卷（期）Volume(Issue) | 起止页码 Pages |
+|-----------|----------------------|--------------|
+| 2020 | — | 559–573 |
+
+---
+
+## 15. CCAligner: A Token Based Large-Gap Clone Detector
+
+**研究生作者（排序）/ Graduate Student Author (Rank):**
+- 王文涛 Wang Wentao（第 1 作者 / 1st author）
+
+**全部作者 / All Authors:** Wentao Wang, Ge Li, Bo Ma, Xin Xia, Zhi Jin
+
+**刊名 / Venue:** IEEE/ACM International Conference on Software Engineering (ICSE 2018)
+
+| 年份 Year | 卷（期）Volume(Issue) | 起止页码 Pages |
+|-----------|----------------------|--------------|
+| 2018 | — | 1066–1077 |
+
+---
+
+## 16. High Performance Computing of DG DFT for Tens of Thousands of Atoms Using Millions of Cores on Sunway TaihuLight
+
+**研究生作者（排序）/ Graduate Student Author (Rank):**
+- 赵胜松 Zhao Shengsong（第 1 作者 / 1st author）
+
+**全部作者 / All Authors:** Shengsong Zhao, Fang Liu, Wei Hu, Tong Liu, Lin-Wang Wang, Wei Fang, Jinlong Yang
+
+**刊名 / Venue:** International Conference for High Performance Computing, Networking, Storage, and Analysis (SC '19)
+
+| 年份 Year | 卷（期）Volume(Issue) | 起止页码 Pages |
+|-----------|----------------------|--------------|
+| 2019 | — | 1–12 |
+
+---
+
+## 17. SmartVerif: Push the Limit of Automation Capability of Verifying Security Protocols by Dynamic Strategies
+
+**研究生作者（排序）/ Graduate Student Author (Rank):**
+- 熊焱 Xiong Yan（第 1 作者 / 1st author）
+
+**全部作者 / All Authors:** Yan Xiong, Cheng Su, Yue Liu, Tianyang Tu, Xueli Chen, Siwei Wang
+
+**刊名 / Venue:** USENIX Security Symposium (USENIX Security '20)
+
+| 年份 Year | 卷（期）Volume(Issue) | 起止页码 Pages |
+|-----------|----------------------|--------------|
+| 2020 | — | 2131–2148 |
+
+---
+
+## 18. CODAR: A Contextual Duration-Aware Qubit Mapping for Various NISQ Devices
+
+**研究生作者（排序）/ Graduate Student Author (Rank):**
+- 丁翊霖 Ding Yilin（第 1 作者 / 1st author）
+
+**全部作者 / All Authors:** Yilin Ding, Xin-Chuan Wu, Adam Holmes, Ash Wiseth, Diana Franklin, Margaret Martonosi, Frederic T. Chong
+
+**刊名 / Venue:** AAAI Conference on Artificial Intelligence (AAAI 2020)
+
+| 年份 Year | 卷（期）Volume(Issue) | 起止页码 Pages |
+|-----------|----------------------|--------------|
+| 2020 | 34(01) | 1–9 |
+
+---
+
+> **说明 / Note:** 上述补充文献信息根据公开学术记录整理；会议论文一般无传统期刊卷期号，起止页码以官方出版程序集为准。如需核实，请通过 IEEE Xplore、ACM Digital Library、USENIX 官网、AAAI 官网等渠道查询。
